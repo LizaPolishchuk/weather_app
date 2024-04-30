@@ -13,11 +13,12 @@ class WeatherDetailsPage extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        if(didPop) return;
+        if (didPop) return;
         Navigator.of(context).pop(context.read<WeatherDetailsCubit>().state.weatherLocation);
         return;
       },
       child: Scaffold(
+        appBar: AppBar(backgroundColor: AppColors.backgroundColor),
         backgroundColor: AppColors.backgroundColor,
         body: BlocBuilder<WeatherDetailsCubit, WeatherDetailsState>(
           bloc: context.read<WeatherDetailsCubit>()..fetchCurrentWeather(),
@@ -35,8 +36,9 @@ class WeatherDetailsPage extends StatelessWidget {
   }
 
   Widget _buildWeatherDetails(WeatherLocation weatherLocation) {
-    return SizedBox(
+    return Container(
       width: double.infinity,
+      padding: const EdgeInsets.only(bottom: kToolbarHeight),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
