@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_client.dart';
+part of 'weather_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'api_client.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _APIClient implements APIClient {
-  _APIClient(
+class _WeatherApi implements WeatherApi {
+  _WeatherApi(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,9 +21,9 @@ class _APIClient implements APIClient {
   String? baseUrl;
 
   @override
-  Future<CurrentWeatherResponseDto> getCurrentWeather(String city) async {
+  Future<CurrentWeatherResponseDto> getCurrentWeather(String query) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'q': city};
+    final queryParameters = <String, dynamic>{r'q': query};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
