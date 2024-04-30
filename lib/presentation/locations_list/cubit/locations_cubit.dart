@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/common/extensions/list_extensions.dart';
 import 'package:weather_app/domain/entities/weather_location.dart';
@@ -20,6 +21,8 @@ class LocationsCubit extends Cubit<LocationsState> {
 
   fetchLocationsList() => emit(state.copyWith(locations: _mockedLocations));
 
-  updateLocationWeather(int index, WeatherLocation location) =>
-      emit(state.copyWith(locations: state.locations.toList()..replaceItem(index, location)));
+  updateLocationWeather(WeatherLocation location) {
+    final index = state.locations.indexWhere((element) => element.city == location.city);
+    emit(state.copyWith(locations: state.locations.toList()..replaceItem(index, location)));
+  }
 }

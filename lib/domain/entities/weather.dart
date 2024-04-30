@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:weather_app/common/extensions/string_extensions.dart';
 
 @immutable
-class Weather {
+class Weather extends Equatable {
   final int temperature;
   final WeatherCondition weatherCondition;
   final DateTime lastUpdated;
@@ -12,6 +13,9 @@ class Weather {
     required this.weatherCondition,
     required this.lastUpdated,
   });
+
+  @override
+  List<Object?> get props => [temperature, weatherCondition, lastUpdated];
 }
 
 enum WeatherCondition {

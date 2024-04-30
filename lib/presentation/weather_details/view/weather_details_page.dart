@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/common/utils/app_colors.dart';
 import 'package:weather_app/domain/entities/weather_location.dart';
+import 'package:weather_app/presentation/locations_list/cubit/locations_cubit.dart';
 import 'package:weather_app/presentation/weather_details/cubit/weather_details_cubit.dart';
 
 class WeatherDetailsPage extends StatelessWidget {
@@ -10,17 +11,16 @@ class WeatherDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (didPop) {
-        if (didPop) return;
-        Navigator.of(context).pop(context.read<WeatherDetailsCubit>().state.weatherLocation);
-        return;
-      },
-      child: Scaffold(
-        appBar: AppBar(backgroundColor: AppColors.backgroundColor),
-        backgroundColor: AppColors.backgroundColor,
-        body: BlocBuilder<WeatherDetailsCubit, WeatherDetailsState>(
+    return Scaffold(
+      appBar: AppBar(backgroundColor: AppColors.backgroundColor),
+      backgroundColor: AppColors.backgroundColor,
+      body: BlocListener<WeatherDetailsCubit, WeatherDetailsState>(
+        listener: (context, state) {
+          if (state.status == WeatherDetailsPageStatus.success) {
+            context.read<LocationsCubit>().updateLocationWeather(state.weatherLocation);
+          }
+        },
+        child: BlocBuilder<WeatherDetailsCubit, WeatherDetailsState>(
           bloc: context.read<WeatherDetailsCubit>()..fetchCurrentWeather(),
           builder: (context, state) {
             return switch (state.status) {

@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:weather_app/domain/entities/weather.dart';
 
 @immutable
-class WeatherLocation {
+class WeatherLocation extends Equatable {
   final String city;
   final String country;
   final Weather? weather;
@@ -24,4 +25,7 @@ class WeatherLocation {
       weather: weather ?? this.weather,
     );
   }
+
+  @override
+  List<Object?> get props => [city, country, weather];
 }

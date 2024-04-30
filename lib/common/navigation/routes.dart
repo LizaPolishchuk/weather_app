@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/data/repository/weather_repository.dart';
 import 'package:weather_app/domain/entities/weather_location.dart';
-import 'package:weather_app/presentation/locations_list/cubit/locations_cubit.dart';
 import 'package:weather_app/presentation/locations_list/view/locations_page.dart';
 import 'package:weather_app/presentation/weather_details/cubit/weather_details_cubit.dart';
 import 'package:weather_app/presentation/weather_details/view/weather_details_page.dart';
@@ -17,10 +16,7 @@ class Routes {
 Route<dynamic>? onGenerateRoute(RouteSettings settings) {
   return switch (settings.name) {
     Routes.locations => MaterialPageRoute(
-        builder: (context) => BlocProvider.value(
-          value: LocationsCubit(),
-          child: const LocationsPage(),
-        ),
+        builder: (context) => const LocationsPage(),
       ),
     Routes.weatherDetails => MaterialPageRoute(builder: (context) {
         final weatherLocation = settings.arguments as WeatherLocation;

@@ -2,7 +2,7 @@ part of 'weather_details_cubit.dart';
 
 enum WeatherDetailsPageStatus { initial, loading, success, failure }
 
-class WeatherDetailsState {
+class WeatherDetailsState extends Equatable {
   const WeatherDetailsState({
     required this.weatherLocation,
     this.status = WeatherDetailsPageStatus.initial,
@@ -20,4 +20,7 @@ class WeatherDetailsState {
       status: status ?? this.status,
     );
   }
+
+  @override
+  List<Object?> get props => [weatherLocation, status];
 }

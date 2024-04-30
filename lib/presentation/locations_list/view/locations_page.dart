@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/common/navigation/routes.dart';
 import 'package:weather_app/common/utils/app_colors.dart';
-import 'package:weather_app/domain/entities/weather_location.dart';
 import 'package:weather_app/presentation/locations_list/cubit/locations_cubit.dart';
 import 'package:weather_app/presentation/locations_list/view/components/location_item.dart';
 
@@ -30,12 +29,9 @@ class LocationsPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final location = state.locations[index];
                 return LocationItem(
-                    weatherLocation: location,
-                    onTap: () async {
-                      final updatedLocation =
-                          await Navigator.of(context).pushNamed(Routes.weatherDetails, arguments: location);
-                      locationsCubit.updateLocationWeather(index, updatedLocation as WeatherLocation);
-                    });
+                  weatherLocation: location,
+                  onTap: () => Navigator.of(context).pushNamed(Routes.weatherDetails, arguments: location),
+                );
               },
             );
           },
