@@ -3,7 +3,7 @@ import 'package:weather_app/common/extensions/string_extensions.dart';
 
 @immutable
 class Weather {
-  final double temperature;
+  final int temperature;
   final WeatherCondition weatherCondition;
   final DateTime lastUpdated;
 
@@ -15,16 +15,16 @@ class Weather {
 }
 
 enum WeatherCondition {
-  sunny,
-  cloudy,
-  partlyCloudy,
-  rainy,
-  snowy;
+  sunny('sunny'),
+  cloudy('cloudy'),
+  partlyCloudy('partly_cloudy'),
+  rainy('rainy');
 
-  String get title => switch (this) {
-        WeatherCondition.partlyCloudy => 'Partly Cloudy',
-        _ => name.capitalize(),
-      };
+  const WeatherCondition(this.value);
 
-  String get iconPath => 'assets/${name.toLowerCase()}.svg';
+  final String value;
+
+  String get title => switch (this) { WeatherCondition.partlyCloudy => 'Partly Cloudy', _ => name.capitalize() };
+
+  String get iconPath => 'assets/icons/ic_$value.svg';
 }

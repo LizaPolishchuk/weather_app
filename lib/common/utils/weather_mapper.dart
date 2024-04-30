@@ -4,7 +4,7 @@ import 'package:weather_app/domain/entities/weather.dart';
 class WeatherMapper {
   static Weather mapWeatherDtoToWeather(WeatherDto weatherDto) {
     return Weather(
-      temperature: weatherDto.tempC,
+      temperature: weatherDto.tempC.toInt(),
       lastUpdated: DateTime.fromMillisecondsSinceEpoch(weatherDto.lastUpdatedEpoch * 1000),
       weatherCondition: mapWeatherCondition(weatherDto.cloud, weatherDto.precipMm),
     );
